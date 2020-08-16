@@ -1,0 +1,47 @@
+h4 {
+    color: blueviolet;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    ;
+}
+h2 {
+    color:darkblue;
+    text-align: justify;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    font-style: initial;
+}
+h3 {
+    color:darkblue;
+    text-align: justify;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    font-style: "italic";
+}
+
+#titulo {
+    color:#2D20D6;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-variant: inherit;
+}
+#imageadd {
+    align-content:  "Right";
+    padding:1% 10%;
+}
+footer {
+    color:saddlebrown;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+#contenido {
+    width:  790px;
+    margin-left: 7%;
+    margin: 0 auto;
+}
+.topbanner {
+    background-color: lightskyblue;
+}
+body {
+    background-image: "./Images/background.jpg";
+    background: linear-gradient(to bottom Right,white,lightskyblue)
+  }

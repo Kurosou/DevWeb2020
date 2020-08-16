@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulario</title>
+        <link rel="stylesheet"href="./styles/estilos.css"> 
+    
+    </head>
+    <body >
+
+
+        <div id="contenido">
+        <header>
+            <hr/>
+            <center>
+                <img  src= "./Images/Poli.png" align="center" id="image" width="400" height="200"> 
+            </center> 
+           <h1 id="titulo">FORMULARIO</h1>
+           <p class="topbanner">
+               .
+           </p>
+        
+        </header>
+            <a style="font-style:oblique">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, error ut voluptas laboriosam eligendi nobis.</a>
+        </header>
+
+        <hr/>
+        <section>
+            <!-- DATOS PERSONALES-->
+
+                <h2>Informacion personal</h2>
+                <p>
+                <img  src= "./Images/formulario.png" align="Right" id="imageadd"width="200" height="200" >
+                
+                    Ingresa tu nombre completo: <input type="text" size="50"name="nombrecompleto" >         
+                </p>
+                <p>
+                    Genero:<br> 
+                    <input type="checkbox" name="gen_masculino">Masculino  <br> 
+                    <input type="checkbox" name="gen_femenino">Femenino  <br> 
+                    <input type="checkbox" name="gen_otro">Otro
+                </p>
+                <p>
+                    Fecha de nacimiento: <input type="date" name="birthday">         
+                </p>
+                <p>
+                    Numero de documento: <input type="number" min= "10000"maxlength="20" minlength="5" name="document_number">         
+                </p>
+                <p>
+                    Edad: <input type="number"  max="100" name="age" size="10">         
+                </p>
+               
+                    
+        </section>    
+        <section>
+        <hr/>
+        <!--Datos de contacto-->
+            <h2>Datos de contacto</h2>
+                <p>
+                Escribe la URL de perfil de facebook: <input type="url" name="facebookurl" size="100"> 
+                </p>
+             
+            <p>
+                Correo electronico: <input type="text" name="mail"size="50">
+            </p>
+        <hr/>
+        <h2>Sobre ti</h2>
+            <p>
+                Color favorito: <input type="color" name="color"> 
+            </p>
+            <h3>¿Algo mas que nos quieras contar?</h2>
+            <article>
+                <textarea name="comentarios" rows="10" cols="100">Escribe aquí tus comentarios</textarea>
+            </article>
+        </section>
+
+
+          <!-- ____boton-->
+        <form action="./Hecho.html" target="_blank">
+
+            <input type="submit" value="Enviar el formulario">
+          
+          </form>
+        <!-- ____DATOS PERSONALES FOOTPAGE-->
+        <footer>
+            <div> 
+                <p>Kuro</p>
+                <p>Kuro@hotmail.com</p>
+
+            </div>
+        </footer>
+    </div>
+    </body>
+</html>
