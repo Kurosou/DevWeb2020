@@ -1,0 +1,22 @@
+{
+  "name": "taller4",
+  "version": "1.0.0",
+  "description": "taller 4 poli",
+  "main": "app.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "poli"
+  ],
+  "author": "Camilo Cruz #|@#€45€¬and MATT",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1",
+    "repl": "^0.1.3"
+  }
+}
