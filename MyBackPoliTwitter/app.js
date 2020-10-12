@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 
 // IMPORT ROUTES
@@ -14,7 +15,7 @@ var postsRouter = require('./routes/posts.route');
 const dbManager = require ("./database.config/database.manager");
 
 var app = express();
-
+app.use(cors());//adicion cors
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,7 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/post', postsRouter);
-
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("SERVER IS LISTEN ON PORT:" , PORT);
+});
 
 /**
  * Testing the connection to the database and recreate the models if the tables doesn´t exists  
