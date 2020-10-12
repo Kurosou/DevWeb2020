@@ -1,4 +1,6 @@
 const dbManager = require ('../database.config/database.manager');
+const operator = require('sequelize');
+const db = require('../database.config/database.manager');
 
 /**
  * Creation of an user
@@ -43,12 +45,10 @@ async function createUser (req, res) {
 async function findAllUsers (req, res){
     try {
         //Execute query
-        const users = await dbManager.User.findAll ();
+        const users = await dbManager.User.findAll({});
         
         //Send response
-        res.json({
-                data: users
-        });
+        res.json(users);
 
     } catch (e) {
         // Print error on console
@@ -87,32 +87,59 @@ async function findOneUser (req, res){
 }
 
 /**
- * Update user
+ * Update user by ID
  */
 async function updateUser (req, res){
     /**
-     * TASK:
-     * IMPLEMENT THE FUNCTION______________________- 
-     */
-    try {
-        const { idUser } = req.params;
-        //Execute query
-        const user = await dbManager.User.update(
-            {username: req.body.username} ,{
-            where: {
-                idUser: idUser,
-             
-            }
-        });                                    
-        //Send response
-        res.send('Updated with username: ' + req.body.username);
+    * TASK: Completed
+    * IMPLEMENT THE FUNCTION______________________- 
+    */
 
-    } catch (e) {
+    try{
+
+        const { idUser } = req.params;
+
+        //search user by id
+        const user = await dbManager.User.findOne({
+            where: {
+                idUser: idUser
+            }
+        });
+
+        if(!req.body){
+            res.status(400).send({
+                message: "Request body is empty!!!!"
+              });
+              return;
+        }else {
+            if(req.body.username){
+                user.username = req.body.username;
+            }
+
+            if(req.body.creation_date){
+                user.creation_date = req.body.creation_date;
+            }
+        }
+        
+        user.save().then (
+            data => {
+                res.send (data);
+            }
+        ).catch (
+            e => {
+                console.log(e);
+                res.status(500).send({
+                    message: "Some error occurred"
+                });
+            }
+        );
+
+    }catch(e){
         // Print error on console
         console.log(e);
         // Send error message as a response 
         res.status(500).send({
-            message: "Error check your datatype"
+            message: "Some error occurred"
         });
     }
 }
@@ -122,28 +149,38 @@ async function updateUser (req, res){
  * @param {*} req 
  * @param {*} res 
  */
-function deleteUserByUsername (req, res){ 
-                /**
-                 * TASK:
-                 * IMPLEMENT THE FUNCTION______________________- 
-                 */
-                try {
-                    const { username } = req.params;
-                    const user = await dbManager.User.destroy({
-                        where: {
-                            username: username
-                        }
-                    });                    
-                    //Send response
-                    res.send('user delete with username: ' + username);
-                } catch (e) {
-                    // Print error on console
-                    console.log(e);
-                    // Send error message as a response 
-                    res.status(500).send({
-                        message: "Some error occurred"
-                    });
-                }
+async function deleteUserByUsername (req, res){ 
+    /**
+    * TASK: Completed
+    * IMPLEMENT THE FUNCTION______________________- 
+    */
+
+    try{
+        const { username } = req.params;
+
+        //search user by id
+        const user = await dbManager.User.findOne({
+            where: {
+                username: username
+            }
+        });
+
+        await user.destroy()
+
+        res.send({
+            message: username+" has been deleted successfully"
+        });
+
+
+    }catch(e){
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }
+
 }
 
 /**
@@ -151,54 +188,54 @@ function deleteUserByUsername (req, res){
  * @param {*} req 
  * @param {*} res 
  */
-function deleteAllUsers (req, res){
-                
-                try {
-                    const user = await dbManager.User.destroy({
-                        where: {}
-                    });                    
-                    //Send response
-                    res.send('all users has been eliminated');
-            
-                } catch (e) {
-                    // Print error on console
-                    console.log(e);
-                    // Send error message as a response 
-                    res.status(500).send({
-                        message: "Some error occurred"
-                    });
-                }
-}
+async function deleteAllUsers (req, res){
+    /**
+    * TASK: Completed
+    * IMPLEMENT THE FUNCTION______________________- 
+    */
 
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- */
-function findAllUsersByCreatedDate (req, res){
-    try {          
-        const { creation_date } = req.params;
-        console.log(req.params);
+    try{
+        
+        try{
+            while(dbManager.User.findOne()!=null){
+                const userDelete = await dbManager.User.findOne();
+                await userDelete.destroy();
+            }
+        }catch{
+            res.send({
+                message: "all users has been deleted successfully"
+            });
+        }
+    }catch(e){
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }}
+
+async function findAllUsersByCreatedDate (req, res){
+    try {
+        const { date } = req.params;
+
         //Execute query
-         const users = await dbManager.User.findAll ({
-             where: {
-                 creation_date: creation_date
-             }
-         });
-         
-         res.json({
-                 data: users
-         });
- 
-     } catch (e) {
-         // Print error on console
-         console.log(e);
-         // Send error message as a response 
-         res.status(500).send({
-             message: "Some error occurred"
-         });
-     }
+        const user = await dbManager.User.findOne({
+            where: {
+                creation_date: date
+            }
+        });
+        //Send response
+        res.json(user);
 
+    } catch (e) {
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }
 }
 
 
